@@ -137,7 +137,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     //* chat field
                     SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.70,
+                      width: MediaQuery.of(context).size.width * 0.60,
                       height: MediaQuery.of(context).size.height * 0.06,
                       child: MyTextField(
                         controller: _controller,
@@ -236,14 +236,15 @@ class _HomePageState extends State<HomePage> {
         speechToText.stop();
 
         //* add the recorded message to list
-        messages.add(ChatMessage(text: audioText, type: ChatMessageType.user));
+        messages.insert(
+            0, ChatMessage(text: audioText, type: ChatMessageType.user));
 
         //* call api SErvice
         var msg = await ApiService.sendMessage(audioText);
 
         //* store bot's reply into message list
         setState(() {
-          messages.add(ChatMessage(text: msg, type: ChatMessageType.bot));
+          messages.insert(0, ChatMessage(text: msg, type: ChatMessageType.bot));
           isLoading = false;
         });
       },
@@ -258,7 +259,6 @@ class _HomePageState extends State<HomePage> {
           height: 50,
           width: 50,
           decoration: BoxDecoration(
-            //color: KChatScreenBackground,
             color: Colors.white30,
             borderRadius: BorderRadius.circular(25),
           ),
