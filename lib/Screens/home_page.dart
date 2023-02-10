@@ -230,6 +230,7 @@ class _HomePageState extends State<HomePage> {
         setState(() {
           isListening = false;
           isLoading = true;
+          _controller.clear();
         });
 
         //* stop listening once tapped away from screen
@@ -246,6 +247,7 @@ class _HomePageState extends State<HomePage> {
         setState(() {
           messages.insert(0, ChatMessage(text: msg, type: ChatMessageType.bot));
           isLoading = false;
+          _controller.clear();
         });
       },
       child: AvatarGlow(
