@@ -22,6 +22,7 @@ ChatGPT incorporated into Mobile App using Flutter & Dart.
 <img src="./results/1.jpg" height="400" width="200" />
 
 </p>
+
 ## References
 + google_fonts <br>
 + google_nav_bar <br>
