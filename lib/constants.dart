@@ -2,9 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-var KScaffoldBackgroundColor = const Color(0xff343541);
-//var KScaffoldBackgroundColor = const Color.fromARGB(255, 243, 243, 255);
-var KAppBackgroundColor = Color(0xff202123);
-var KTextColor = Colors.white;
-var KChatScreenBackground = const Color(0xffbebec7);
+const KScaffoldBackgroundColor = Color(0xff343541);
+const KAppBackgroundColor = Color(0xff202123);
+const KTextColor = Colors.white;
+const KChatScreenBackground = Color(0xffbebec7);
 const KBotBackgroundColor = Color(0xff444654);

@@ -7,8 +7,11 @@ import 'package:http/http.dart' as http;
 var apiKey = dotenv.env['api_key'];
 
 class ApiService {
-//* base url
-  static String baseUrl = "https://api.openai.com/v1/completions";
+//* base url for text
+  static String baseUrlText = "https://api.openai.com/v1/completions";
+
+//* base url for image
+  static String baseUrlImage = "https://api.openai.com/v1/images/generations";
 
 //* header of the json
   static Map<String, String> header = {
@@ -16,10 +19,10 @@ class ApiService {
     'Authorization': "Bearer $apiKey",
   };
 
-  //* function to send message
+  //* function to send text message
   static sendMessage(String? message) async {
     var res = await http.post(
-      Uri.parse(baseUrl),
+      Uri.parse(baseUrlText),
       headers: header,
       body: jsonEncode({
         "model": "text-davinci-003",
@@ -37,6 +40,29 @@ class ApiService {
       var data = jsonDecode(res.body.toString());
       var msg = data['choices'][0]['text'];
       return msg;
+    } else {
+      print('failed to fetch data');
+    }
+  }
+
+  //* function to generate image
+  static generateImg(String question) async {
+    var res = await http.post(
+      Uri.parse(baseUrlImage),
+      headers: header,
+      body: jsonDecode(
+        {
+          "prompt": question,
+          "n": 1,
+          "size": "small",
+        } as String,
+      ),
+    );
+
+    if (res.statusCode == 200) {
+      var data = jsonDecode(res.body.toString());
+      var img = data['data'][0]['url'].toString();
+      return img;
     } else {
       print('failed to fetch data');
     }

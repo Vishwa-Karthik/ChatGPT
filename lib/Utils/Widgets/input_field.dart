@@ -6,11 +6,13 @@ import '../../../constants.dart';
 class MyTextField extends StatelessWidget {
   final TextEditingController controller;
   final String? hintText;
+  final Widget suffixIcon;
 
   const MyTextField({
     super.key,
     required this.controller,
     required this.hintText,
+    required this.suffixIcon,
   });
 
   @override
@@ -34,15 +36,7 @@ class MyTextField extends StatelessWidget {
         labelStyle: const TextStyle(
           color: Colors.black,
         ),
-        suffixIcon: IconButton(
-          onPressed: () {
-            controller.clear();
-          },
-          icon: const Icon(
-            Icons.clear,
-            color: Colors.white30,
-          ),
-        ),
+        suffixIcon: suffixIcon,
         hintText: hintText,
         hintStyle: const TextStyle(
           color: Colors.white30,

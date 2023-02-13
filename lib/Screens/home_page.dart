@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_unnecessary_containers
 
 import 'package:avatar_glow/avatar_glow.dart';
+import 'package:chatgpt_flutter/Error%20Handling/snack_bar.dart';
 import 'package:chatgpt_flutter/Utils/Widgets/chat_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -142,10 +143,20 @@ class _HomePageState extends State<HomePage> {
                       child: MyTextField(
                         controller: _controller,
                         hintText: audioText,
+                        suffixIcon: mySubmitButton(),
                       ),
                     ),
-                    //* send button
-                    mySubmitButton(),
+
+                    const SizedBox(
+                      width: 10,
+                    ),
+
+                    //* Generate Image Button
+                    myImageGen(),
+
+                    const SizedBox(
+                      width: 20,
+                    ),
 
                     //* audio button
                     myMicButton(),
@@ -155,6 +166,38 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget myImageGen() {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25),
+        color: Colors.white30,
+      ),
+      child: IconButton(
+        icon: const Icon(
+          Icons.image,
+          color: Colors.black,
+        ),
+        onPressed: () {
+          // Future.delayed(const Duration(milliseconds: 50))
+          //     .then((value) => scrollMethod());
+
+          // //* call chatbot api
+          // ApiService.sendMessage(input).then((value) {
+          //   setState(() {
+          //     isLoading = false;
+          //     messages.insert(
+          //       0,
+          //       ChatMessage(
+          //           text: "Image Generated",
+          //           type: ChatMessageType.user),
+          //     );
+          //   });
+          // });
+        },
       ),
     );
   }
@@ -170,33 +213,37 @@ class _HomePageState extends State<HomePage> {
           color: Colors.white,
         ),
         onPressed: () {
-          //* display user input
-          setState(() {
-            messages.insert(
-              0,
-              ChatMessage(text: _controller.text, type: ChatMessageType.user),
-            );
-            isLoading = true;
-          });
-          var input = _controller.text;
-          _controller.clear();
-
-          Future.delayed(const Duration(milliseconds: 50))
-              .then((value) => scrollMethod());
-
-          //* call chatbot api
-          ApiService.sendMessage(input).then((value) {
+          if (_controller.text.isNotEmpty) {
+            //* display user input
             setState(() {
-              isLoading = false;
               messages.insert(
-                  0, ChatMessage(text: value, type: ChatMessageType.bot));
+                0,
+                ChatMessage(text: _controller.text, type: ChatMessageType.user),
+              );
+              isLoading = true;
             });
-          });
+            var input = _controller.text;
+            _controller.clear();
 
-          //* clear controller
-          _controller.clear();
-          Future.delayed(const Duration(milliseconds: 50))
-              .then((value) => scrollMethod());
+            Future.delayed(const Duration(milliseconds: 50))
+                .then((value) => scrollMethod());
+
+            //* call chatbot api
+            ApiService.sendMessage(input).then((value) {
+              setState(() {
+                isLoading = false;
+                messages.insert(
+                    0, ChatMessage(text: value, type: ChatMessageType.bot));
+              });
+            });
+
+            //* clear controller
+            _controller.clear();
+            Future.delayed(const Duration(milliseconds: 50))
+                .then((value) => scrollMethod());
+          } else {
+            showErrorToast(context, "Please enter a message");
+          }
         },
       )),
     );
