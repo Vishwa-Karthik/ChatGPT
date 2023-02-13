@@ -50,12 +50,12 @@ class ApiService {
     var res = await http.post(
       Uri.parse(baseUrlImage),
       headers: header,
-      body: jsonDecode(
+      body: jsonEncode(
         {
           "prompt": question,
           "n": 1,
           "size": "small",
-        } as String,
+        },
       ),
     );
 
