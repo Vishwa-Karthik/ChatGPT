@@ -105,8 +105,10 @@ class _HomePageState extends State<HomePage> {
                       itemBuilder: (BuildContext context, index) {
                         var chat = messages[index];
                         return ChatBubble(
-                            textMessage: chat.text.toString(),
-                            messagetype: chat.type);
+                          reply: chat.text.toString(),
+                          messagetype: chat.type,
+                          isImage: false,
+                        );
                       },
                     ),
                   ),
@@ -182,21 +184,39 @@ class _HomePageState extends State<HomePage> {
           color: Colors.black,
         ),
         onPressed: () {
-          // Future.delayed(const Duration(milliseconds: 50))
-          //     .then((value) => scrollMethod());
+          if (_controller.text.isNotEmpty) {
+            //* display user input
+            setState(() {
+              messages.insert(
+                0,
+                ChatMessage(text: _controller.text, type: ChatMessageType.user),
+              );
+              isLoading = true;
+            });
+            var input = _controller.text;
+            _controller.clear();
 
-          // //* call chatbot api
-          // ApiService.sendMessage(input).then((value) {
-          //   setState(() {
-          //     isLoading = false;
-          //     messages.insert(
-          //       0,
-          //       ChatMessage(
-          //           text: "Image Generated",
-          //           type: ChatMessageType.user),
-          //     );
-          //   });
-          // });
+            //* scroll to bottom
+            Future.delayed(const Duration(milliseconds: 50))
+                .then((value) => scrollMethod());
+
+            //* call chatbot api
+            ApiService.generateImg(input).then((value) {
+              setState(() {
+                messages.insert(
+                  0,
+                  ChatMessage(text: value, type: ChatMessageType.bot),
+                );
+                isLoading = false;
+              });
+
+              //* scroll to bottom
+              Future.delayed(const Duration(milliseconds: 50))
+                  .then((value) => scrollMethod());
+            });
+          } else {
+            showErrorToast(context, "Enter a message to generate image");
+          }
         },
       ),
     );

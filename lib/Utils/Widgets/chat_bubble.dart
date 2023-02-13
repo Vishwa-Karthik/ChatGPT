@@ -5,13 +5,15 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../constants.dart';
 
 class ChatBubble extends StatelessWidget {
-  final String textMessage;
+  final String reply;
   final ChatMessageType? messagetype;
+  final bool isImage;
 
   const ChatBubble({
     super.key,
-    required this.textMessage,
+    required this.reply,
     required this.messagetype,
+    required this.isImage,
   });
 
   @override
@@ -32,30 +34,32 @@ class ChatBubble extends StatelessWidget {
         ),
 
         //* for message
-        Expanded(
-          child: Container(
-            padding: const EdgeInsets.all(12),
-            margin: const EdgeInsets.only(bottom: 8),
-            decoration: BoxDecoration(
-              color: messagetype == ChatMessageType.bot
-                  ? KBotBackgroundColor
-                  : KScaffoldBackgroundColor,
-              borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(12),
-                bottomRight: Radius.circular(12),
-                bottomLeft: Radius.circular(12),
+        isImage
+            ? Image.network(reply)
+            : Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(12),
+                  margin: const EdgeInsets.only(bottom: 8),
+                  decoration: BoxDecoration(
+                    color: messagetype == ChatMessageType.bot
+                        ? KBotBackgroundColor
+                        : KScaffoldBackgroundColor,
+                    borderRadius: const BorderRadius.only(
+                      topRight: Radius.circular(12),
+                      bottomRight: Radius.circular(12),
+                      bottomLeft: Radius.circular(12),
+                    ),
+                  ),
+                  child: Text(
+                    reply,
+                    style: GoogleFonts.notoSans(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
               ),
-            ),
-            child: Text(
-              textMessage,
-              style: GoogleFonts.notoSans(
-                color: Colors.white,
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-        ),
       ],
     );
   }
