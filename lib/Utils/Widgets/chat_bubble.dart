@@ -25,22 +25,61 @@ class ChatBubble extends StatelessWidget {
                 children: [
                   //* circle avatar
                   CircleAvatar(
-                    radius: 25,
+                    radius: 20,
                     backgroundColor: Colors.teal,
                     backgroundImage: messagetype == ChatMessageType.bot
                         ? const AssetImage("assets/chatgpt_icon.jpg")
                         : const AssetImage("assets/myprofile.jpg"),
                   ),
 
-                  //* for message
+                  const SizedBox(width: 5),
+
+                  //* for replies
                   isImage
                       ? Container(
-                          width: MediaQuery.of(context).size.width * 0.55,
+                          padding: const EdgeInsets.all(12),
+                          margin: const EdgeInsets.only(bottom: 8),
+                          decoration: BoxDecoration(
+                            color: messagetype == ChatMessageType.bot
+                                ? KBotBackgroundColor
+                                : KScaffoldBackgroundColor,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          width: MediaQuery.of(context).size.width * 0.70,
                           height: MediaQuery.of(context).size.height * 0.26,
                           child: AspectRatio(
                             aspectRatio: 16 / 9,
-                            child: Image.network(
-                              reply,
+                            child: Row(
+                              children: [
+                                //* for image
+                                Image.network(
+                                  reply,
+                                ),
+
+                                //* for features
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    //* download button
+                                    IconButton(
+                                      icon: const Icon(
+                                        Icons.download,
+                                        color: Colors.white,
+                                      ),
+                                      onPressed: () {},
+                                    ),
+
+                                    //* share button
+                                    IconButton(
+                                      icon: const Icon(
+                                        Icons.share,
+                                        color: Colors.white,
+                                      ),
+                                      onPressed: () {},
+                                    ),
+                                  ],
+                                )
+                              ],
                             ),
                           ),
                         )
@@ -103,7 +142,7 @@ class ChatBubble extends StatelessWidget {
 
                   //* circle avatar
                   CircleAvatar(
-                    radius: 25,
+                    radius: 20,
                     backgroundColor: Colors.teal,
                     backgroundImage: messagetype == ChatMessageType.bot
                         ? const AssetImage("assets/chatgpt_icon.jpg")

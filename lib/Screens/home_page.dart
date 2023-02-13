@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                     child: ListView.builder(
                       shrinkWrap: true,
                       padding: const EdgeInsets.only(
-                          bottom: 20, left: 20, right: 25, top: 25),
+                          bottom: 10, left: 10, right: 10, top: 10),
                       reverse: true,
                       controller: scrollController,
                       itemCount: messages.length,
