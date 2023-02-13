@@ -158,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                     myImageGen(),
 
                     const SizedBox(
-                      width: 20,
+                      width: 10,
                     ),
 
                     //* audio button
@@ -183,6 +183,7 @@ class _HomePageState extends State<HomePage> {
         icon: const Icon(
           Icons.image,
           color: Colors.black,
+          size: 20,
         ),
         onPressed: () {
           if (_controller.text.isNotEmpty) {

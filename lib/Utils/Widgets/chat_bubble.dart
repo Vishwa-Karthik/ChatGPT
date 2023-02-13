@@ -19,16 +19,24 @@ class ChatBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: messagetype == ChatMessageType.user
+        child: messagetype == ChatMessageType.bot
             ? Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  //* circle avatar
+                  CircleAvatar(
+                    radius: 25,
+                    backgroundColor: Colors.teal,
+                    backgroundImage: messagetype == ChatMessageType.bot
+                        ? const AssetImage("assets/chatgpt_icon.jpg")
+                        : const AssetImage("assets/myprofile.jpg"),
+                  ),
+
                   //* for message
                   isImage
                       ? Container(
-                          color: Colors.teal,
-                          width: MediaQuery.of(context).size.width * 0.6,
-                          height: MediaQuery.of(context).size.height * 0.2,
+                          width: MediaQuery.of(context).size.width * 0.55,
+                          height: MediaQuery.of(context).size.height * 0.26,
                           child: AspectRatio(
                             aspectRatio: 16 / 9,
                             child: Image.network(
@@ -61,20 +69,38 @@ class ChatBubble extends StatelessWidget {
                             ),
                           ),
                         ),
-
-                  //* circle avatar
-                  CircleAvatar(
-                    radius: 25,
-                    backgroundColor: Colors.teal,
-                    backgroundImage: messagetype == ChatMessageType.bot
-                        ? const AssetImage("assets/chatgpt_icon.jpg")
-                        : const AssetImage("assets/myprofile.jpg"),
-                  ),
                 ],
               )
             : Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
+                  //* for message
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.all(12),
+                      margin: const EdgeInsets.only(bottom: 8),
+                      decoration: BoxDecoration(
+                        color: messagetype == ChatMessageType.bot
+                            ? KBotBackgroundColor
+                            : KScaffoldBackgroundColor,
+                        borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(12),
+                          bottomRight: Radius.circular(12),
+                          bottomLeft: Radius.circular(12),
+                        ),
+                      ),
+                      child: Text(
+                        textAlign: TextAlign.end,
+                        reply,
+                        style: GoogleFonts.notoSans(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
+
                   //* circle avatar
                   CircleAvatar(
                     radius: 25,
@@ -83,38 +109,6 @@ class ChatBubble extends StatelessWidget {
                         ? const AssetImage("assets/chatgpt_icon.jpg")
                         : const AssetImage("assets/myprofile.jpg"),
                   ),
-
-                  const SizedBox(
-                    width: 5,
-                  ),
-
-                  //* for message
-                  isImage
-                      ? Image.network(reply)
-                      : Expanded(
-                          child: Container(
-                            padding: const EdgeInsets.all(12),
-                            margin: const EdgeInsets.only(bottom: 8),
-                            decoration: BoxDecoration(
-                              color: messagetype == ChatMessageType.bot
-                                  ? KBotBackgroundColor
-                                  : KScaffoldBackgroundColor,
-                              borderRadius: const BorderRadius.only(
-                                topRight: Radius.circular(12),
-                                bottomRight: Radius.circular(12),
-                                bottomLeft: Radius.circular(12),
-                              ),
-                            ),
-                            child: Text(
-                              reply,
-                              style: GoogleFonts.notoSans(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                        ),
                 ],
               ));
   }
