@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
 
   var scrollController = ScrollController();
 
-  //* list to hold all tpyes of message
+  //* list to hold Text type of message
   final List<ChatMessage> messages = [];
 
   //* text controller to enter messgae
@@ -98,7 +98,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: ListView.builder(
                       shrinkWrap: true,
-                      padding: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.only(
+                          bottom: 20, left: 20, right: 25, top: 25),
                       reverse: true,
                       controller: scrollController,
                       itemCount: messages.length,
@@ -107,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                         return ChatBubble(
                           reply: chat.text.toString(),
                           messagetype: chat.type,
-                          isImage: false,
+                          isImage: chat.isImage,
                         );
                       },
                     ),
@@ -189,7 +190,11 @@ class _HomePageState extends State<HomePage> {
             setState(() {
               messages.insert(
                 0,
-                ChatMessage(text: _controller.text, type: ChatMessageType.user),
+                ChatMessage(
+                  text: _controller.text,
+                  type: ChatMessageType.user,
+                  isImage: false,
+                ),
               );
               isLoading = true;
             });
@@ -205,7 +210,8 @@ class _HomePageState extends State<HomePage> {
               setState(() {
                 messages.insert(
                   0,
-                  ChatMessage(text: value, type: ChatMessageType.bot),
+                  ChatMessage(
+                      text: value, type: ChatMessageType.bot, isImage: true),
                 );
                 isLoading = false;
               });
@@ -238,7 +244,11 @@ class _HomePageState extends State<HomePage> {
             setState(() {
               messages.insert(
                 0,
-                ChatMessage(text: _controller.text, type: ChatMessageType.user),
+                ChatMessage(
+                  text: _controller.text,
+                  type: ChatMessageType.user,
+                  isImage: false,
+                ),
               );
               isLoading = true;
             });
@@ -253,7 +263,12 @@ class _HomePageState extends State<HomePage> {
               setState(() {
                 isLoading = false;
                 messages.insert(
-                    0, ChatMessage(text: value, type: ChatMessageType.bot));
+                    0,
+                    ChatMessage(
+                      text: value,
+                      type: ChatMessageType.bot,
+                      isImage: false,
+                    ));
               });
             });
 
@@ -305,14 +320,19 @@ class _HomePageState extends State<HomePage> {
 
         //* add the recorded message to list
         messages.insert(
-            0, ChatMessage(text: audioText, type: ChatMessageType.user));
+            0,
+            ChatMessage(
+                text: audioText, type: ChatMessageType.user, isImage: false));
 
         //* call api SErvice
         var msg = await ApiService.sendMessage(audioText);
 
         //* store bot's reply into message list
         setState(() {
-          messages.insert(0, ChatMessage(text: msg, type: ChatMessageType.bot));
+          messages.insert(
+              0,
+              ChatMessage(
+                  text: msg, type: ChatMessageType.bot, isImage: false));
           isLoading = false;
           _controller.clear();
         });
