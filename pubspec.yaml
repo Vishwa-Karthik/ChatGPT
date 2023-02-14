@@ -43,6 +43,7 @@ dependencies:
   flutter_launcher_icons:
   motion_toast: ^2.6.5
   animated_text_kit:
+  flutter_spinkit:
 
 flutter_icons:
   android: "launcher_icon"
