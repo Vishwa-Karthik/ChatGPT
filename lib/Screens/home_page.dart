@@ -22,6 +22,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 //* Chat SCreen Instances
 
+  //* keyboard focus node
+  late FocusNode focusNode;
+
   //* loading screen
   late bool isLoading;
 
@@ -38,6 +41,14 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     isLoading = false;
+    focusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    focusNode.dispose();
+    _controller.dispose();
+    super.dispose();
   }
 
   scrollMethod() {
@@ -144,6 +155,7 @@ class _HomePageState extends State<HomePage> {
                       width: MediaQuery.of(context).size.width * 0.60,
                       height: MediaQuery.of(context).size.height * 0.06,
                       child: MyTextField(
+                        focusNode: focusNode,
                         controller: _controller,
                         hintText: audioText,
                         suffixIcon: mySubmitButton(),
@@ -252,6 +264,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               );
               isLoading = true;
+              focusNode.unfocus();
             });
             var input = _controller.text;
             _controller.clear();

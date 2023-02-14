@@ -61,7 +61,6 @@ class ApiService {
 
     if (res.statusCode == 200) {
       var data = jsonDecode(res.body.toString());
-      print(data);
       var img = data['data'][0]['url'].toString();
       print(img);
       return img;

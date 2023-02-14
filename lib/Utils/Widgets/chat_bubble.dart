@@ -52,8 +52,13 @@ class ChatBubble extends StatelessWidget {
                             child: Row(
                               children: [
                                 //* for image
-                                Image.network(
-                                  reply,
+                                FadeInImage(
+                                  placeholder: const NetworkImage(
+                                    "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif",
+                                  ),
+                                  image: NetworkImage(
+                                    reply,
+                                  ),
                                 ),
 
                                 //* for features
