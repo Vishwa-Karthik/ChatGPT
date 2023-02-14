@@ -55,11 +55,12 @@ class ChatBubble extends StatelessWidget {
                                 //* for image
                                 FadeInImage(
                                   placeholder: const NetworkImage(
-                                    "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif",
+                                    "https://media.giphy.com/media/xTkcEQACH24SMPxIQg/giphy.gif",
                                   ),
                                   image: NetworkImage(
                                     reply,
                                   ),
+                                  fit: BoxFit.contain,
                                 ),
 
                                 //* for features

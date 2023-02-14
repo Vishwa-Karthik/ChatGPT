@@ -5,6 +5,7 @@ import 'package:chatgpt_flutter/Error%20Handling/snack_bar.dart';
 import 'package:chatgpt_flutter/Utils/Widgets/chat_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import '../Helpers/api_Service.dart';
@@ -125,20 +126,21 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
+              ],
+            ),
 
-                //* loading screen
-                Center(
-                  child: Visibility(
-                    visible: isLoading,
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: CircularProgressIndicator(
-                        color: Colors.white,
-                      ),
-                    ),
+            //* loading screen
+            Center(
+              child: Visibility(
+                visible: isLoading,
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: SpinKitThreeBounce(
+                    color: Colors.white,
+                    size: 20,
                   ),
                 ),
-              ],
+              ),
             ),
 
             //* text field & submit method

@@ -32,3 +32,5 @@ ChatGPT incorporated into Mobile App using Flutter & Dart.
 + http <br>
 + flutter_launcher_icons <br>
 + Motion Toast
++ Flutter Spin Kit
++ Animated Text Kit
