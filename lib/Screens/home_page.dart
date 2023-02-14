@@ -302,24 +302,30 @@ class _HomePageState extends State<HomePage> {
 
   //* Audio Button
   Widget myMicButton() {
-    return GestureDetector(
-      onTapDown: (details) async {
+    return InkWell(
+      onTapDown: (_) async {
         HapticFeedback.vibrate();
         if (!isListening) {
-          //* check if you can listen to audio -> return bool value
-          bool avail = await speechToText.initialize();
+          try {
+            //* check if you can listen to audio -> return bool value
+            bool avail = await speechToText.initialize();
 
-          if (avail) {
-            setState(() {
-              isListening = true;
+            if (avail) {
+              setState(() {
+                isListening = true;
 
-              //* start listening and append result to var
-              speechToText.listen(onResult: (res) {
-                setState(() {
-                  audioText = res.recognizedWords;
+                //* start listening and append result to var
+                speechToText.listen(onResult: (res) {
+                  setState(() {
+                    audioText = res.recognizedWords;
+                  });
                 });
               });
-            });
+            } else {
+              showErrorToast(context, "Permission not granted");
+            }
+          } catch (e) {
+            showErrorToast(context, "No Microphone found");
           }
         }
       },
