@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:chatgpt_flutter/Utils/Models/chat_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -91,7 +92,7 @@ class ChatBubble extends StatelessWidget {
                       : Expanded(
                           child: Container(
                             padding: const EdgeInsets.all(12),
-                            margin: const EdgeInsets.only(bottom: 8),
+                            margin: const EdgeInsets.only(bottom: 18),
                             decoration: BoxDecoration(
                               color: messagetype == ChatMessageType.bot
                                   ? KBotBackgroundColor
@@ -102,13 +103,20 @@ class ChatBubble extends StatelessWidget {
                                 bottomLeft: Radius.circular(12),
                               ),
                             ),
-                            child: Text(
-                              textAlign: TextAlign.end,
-                              reply,
+                            child: DefaultTextStyle(
                               style: GoogleFonts.notoSans(
                                 color: Colors.white,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
+                              ),
+                              child: AnimatedTextKit(
+                                repeatForever: false,
+                                isRepeatingAnimation: false,
+                                displayFullTextOnTap: true,
+                                totalRepeatCount: 1,
+                                animatedTexts: [
+                                  TyperAnimatedText(reply),
+                                ],
                               ),
                             ),
                           ),
