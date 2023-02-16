@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, avoid_print
+
 import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';

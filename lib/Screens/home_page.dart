@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_unnecessary_containers
+// ignore_for_file: avoid_unnecessary_containers, use_build_context_synchronously
 
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:chatgpt_flutter/Error%20Handling/snack_bar.dart';
@@ -103,8 +103,8 @@ class _HomePageState extends State<HomePage> {
                 //* chat screen
                 Expanded(
                   child: Container(
-                    width: MediaQuery.of(context).size.width * 0.97,
-                    height: MediaQuery.of(context).size.height * 0.78,
+                    width: MediaQuery.of(context).size.width * 0.93,
+                    height: MediaQuery.of(context).size.height * 0.70,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                     ),
@@ -130,14 +130,17 @@ class _HomePageState extends State<HomePage> {
             ),
 
             //* loading screen
-            Center(
-              child: Visibility(
-                visible: isLoading,
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: SpinKitThreeBounce(
-                    color: Colors.white,
-                    size: 20,
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.04,
+              child: Center(
+                child: Visibility(
+                  visible: isLoading,
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: SpinKitThreeBounce(
+                      color: Colors.white,
+                      size: 20,
+                    ),
                   ),
                 ),
               ),

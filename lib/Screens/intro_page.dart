@@ -21,7 +21,7 @@ class IntroPage extends StatelessWidget {
                 top: 50.0, bottom: 0, right: 80, left: 80),
             child: Image.asset(
               'assets/chat-bot.png',
-              height: 250,
+              height: MediaQuery.of(context).size.height * 0.2,
             ),
           ),
 
@@ -37,7 +37,7 @@ class IntroPage extends StatelessWidget {
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
                 fontWeight: FontWeight.w300,
-                fontSize: 30,
+                fontSize: MediaQuery.of(context).size.height * 0.02,
                 letterSpacing: 3,
                 color: KTextColor,
               ),
@@ -50,7 +50,7 @@ class IntroPage extends StatelessWidget {
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
                 fontWeight: FontWeight.w300,
-                fontSize: 30,
+                fontSize: 20,
                 letterSpacing: 3,
                 color: KTextColor,
               ),
@@ -96,7 +96,9 @@ class IntroPage extends StatelessWidget {
             ),
           ),
 
-          const Spacer(),
+          const Spacer(
+            flex: 2,
+          ),
 
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 28.0),
