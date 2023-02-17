@@ -21,7 +21,7 @@ class IntroPage extends StatelessWidget {
                 top: 50.0, bottom: 0, right: 80, left: 80),
             child: Image.asset(
               'assets/chat-bot.png',
-              height: MediaQuery.of(context).size.height * 0.2,
+              height: MediaQuery.of(context).size.height * 0.4,
             ),
           ),
 

@@ -151,14 +151,14 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.99,
-                height: MediaQuery.of(context).size.height * 0.09,
+                height: MediaQuery.of(context).size.height * 0.10,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     //* chat field
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.60,
-                      height: MediaQuery.of(context).size.height * 0.06,
+                      height: MediaQuery.of(context).size.height * 0.07,
                       child: MyTextField(
                         focusNode: focusNode,
                         controller: _controller,

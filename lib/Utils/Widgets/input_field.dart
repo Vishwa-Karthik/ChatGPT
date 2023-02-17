@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../constants.dart';
@@ -20,6 +21,7 @@ class MyTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      maxLengthEnforcement: MaxLengthEnforcement.enforced,
       focusNode: focusNode,
       autocorrect: true,
       controller: controller,
