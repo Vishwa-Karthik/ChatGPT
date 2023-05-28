@@ -33,16 +33,22 @@ class MyTextField extends StatelessWidget {
         fillColor: KBotBackgroundColor,
         filled: true,
         focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(18),
-            borderSide: BorderSide.none),
+          borderRadius: BorderRadius.circular(18),
+          borderSide: const BorderSide(
+            color: Colors.grey,
+          ),
+        ),
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(18),
-            borderSide: BorderSide.none),
+            borderSide: const BorderSide(
+              color: Colors.grey,
+            )),
         labelStyle: const TextStyle(
           color: Colors.black,
         ),
         suffixIcon: suffixIcon,
         hintText: hintText,
+        alignLabelWithHint: true,
         hintStyle: const TextStyle(
           color: Colors.white30,
         ),

@@ -37,23 +37,21 @@ class IntroPage extends StatelessWidget {
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
                 fontWeight: FontWeight.w300,
-                fontSize: MediaQuery.of(context).size.height * 0.02,
+                fontSize: 16,
                 letterSpacing: 3,
                 color: KTextColor,
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 25, right: 20),
-            child: Text(
-              "Not your regualar AI Chat Bot ",
-              textAlign: TextAlign.center,
-              style: GoogleFonts.poppins(
-                fontWeight: FontWeight.w300,
-                fontSize: 20,
-                letterSpacing: 3,
-                color: KTextColor,
-              ),
+          const SizedBox(height: 25),
+          Text(
+            "Not your regualar AI Chat Bot ",
+            textAlign: TextAlign.center,
+            style: GoogleFonts.poppins(
+              fontWeight: FontWeight.w300,
+              fontSize: 18,
+              letterSpacing: 3,
+              color: KTextColor,
             ),
           ),
 
@@ -63,16 +61,16 @@ class IntroPage extends StatelessWidget {
 
           //* Tagline
           Text(
-            "Open AI Chat Bot",
+            "Open AI ChatGPT III Bot",
             style: GoogleFonts.poppins(
-              letterSpacing: 4,
-              fontSize: 23,
+              letterSpacing: 2,
+              fontSize: 22,
               fontWeight: FontWeight.w600,
               color: KTextColor,
             ),
           ),
           const SizedBox(
-            height: 40,
+            height: 80,
           ),
 
           //* Get STarted button
@@ -81,7 +79,12 @@ class IntroPage extends StatelessWidget {
               color: Colors.black,
               borderRadius: BorderRadius.circular(35),
             ),
-            child: MaterialButton(
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black,
+                elevation: 3,
+                shadowColor: Colors.grey,
+              ),
               onPressed: () {
                 HapticFeedback.mediumImpact();
                 Navigator.pushReplacement(context,
@@ -103,12 +106,12 @@ class IntroPage extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 28.0),
             child: Divider(
-              color: Colors.white,
+              color: Colors.grey,
             ),
           ),
           Text(
             "Developed by Vishwa Karthik",
-            style: GoogleFonts.notoSans(color: Colors.white, fontSize: 12),
+            style: GoogleFonts.notoSans(color: Colors.grey, fontSize: 10),
           ),
 
           const Spacer(),

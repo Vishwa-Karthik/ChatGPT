@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:speech_to_text/speech_to_text.dart';
-import '../Helpers/api_Service.dart';
+import '../service/api_Service.dart';
 import '../Utils/Models/chat_model.dart';
 import '../Utils/Widgets/input_field.dart';
 import '../constants.dart';
@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         centerTitle: true,
-        elevation: 5,
+        elevation: 2,
       ),
 
       //* Body
@@ -158,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                     //* chat field
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.60,
-                      height: MediaQuery.of(context).size.height * 0.07,
+                      height: MediaQuery.of(context).size.height * 0.05,
                       child: MyTextField(
                         focusNode: focusNode,
                         controller: _controller,
@@ -192,15 +192,16 @@ class _HomePageState extends State<HomePage> {
 
   Widget myImageGen() {
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25),
+      height: 40,
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
         color: Colors.white30,
       ),
       child: IconButton(
         icon: const Icon(
           Icons.image,
           color: Colors.black,
-          size: 20,
+          size: 24,
         ),
         onPressed: () {
           if (_controller.text.isNotEmpty) {
@@ -251,55 +252,60 @@ class _HomePageState extends State<HomePage> {
     return Visibility(
       visible: !isLoading,
       child: Container(
+          height: 40,
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+          ),
           child: IconButton(
-        icon: const Icon(
-          Icons.send_rounded,
-          color: Colors.white,
-        ),
-        onPressed: () {
-          if (_controller.text.isNotEmpty) {
-            //* display user input
-            setState(() {
-              messages.insert(
-                0,
-                ChatMessage(
-                  text: _controller.text,
-                  type: ChatMessageType.user,
-                  isImage: false,
-                ),
-              );
-              isLoading = true;
-              focusNode.unfocus();
-            });
-            var input = _controller.text;
-            _controller.clear();
-
-            Future.delayed(const Duration(milliseconds: 50))
-                .then((value) => scrollMethod());
-
-            //* call chatbot api
-            ApiService.sendMessage(input).then((value) {
-              setState(() {
-                isLoading = false;
-                messages.insert(
+            icon: const Icon(
+              Icons.send_rounded,
+              color: Colors.white,
+              size: 20,
+            ),
+            onPressed: () {
+              if (_controller.text.isNotEmpty) {
+                //* display user input
+                setState(() {
+                  messages.insert(
                     0,
                     ChatMessage(
-                      text: value,
-                      type: ChatMessageType.bot,
+                      text: _controller.text,
+                      type: ChatMessageType.user,
                       isImage: false,
-                    ));
-              });
-            });
+                    ),
+                  );
+                  isLoading = true;
+                  focusNode.unfocus();
+                });
+                var input = _controller.text;
+                _controller.clear();
 
-            //* clear controller
-            _controller.clear();
-            Future.delayed(const Duration(milliseconds: 50))
-                .then((value) => scrollMethod());
-          } else {
-            showErrorToast(context, "Please enter a message");
-          }
-        },
-      )),
+                Future.delayed(const Duration(milliseconds: 50))
+                    .then((value) => scrollMethod());
+
+                //* call chatbot api
+                ApiService.sendMessage(input).then((value) {
+                  setState(() {
+                    isLoading = false;
+                    messages.insert(
+                        0,
+                        ChatMessage(
+                          text: value,
+                          type: ChatMessageType.bot,
+                          isImage: false,
+                        ));
+                  });
+                });
+
+                //* clear controller
+                _controller.clear();
+                Future.delayed(const Duration(milliseconds: 50))
+                    .then((value) => scrollMethod());
+              } else {
+                showErrorToast(context, "Please enter a message");
+              }
+            },
+          )),
     );
   }
 
@@ -370,16 +376,16 @@ class _HomePageState extends State<HomePage> {
         glowColor: Colors.white30,
         showTwoGlows: true,
         child: Container(
-          height: 50,
-          width: 50,
-          decoration: BoxDecoration(
+          height: 40,
+          width: 40,
+          decoration: const BoxDecoration(
             color: Colors.white30,
-            borderRadius: BorderRadius.circular(25),
+            shape: BoxShape.circle,
           ),
           child: Icon(
             isListening ? Icons.mic : Icons.mic_off,
             color: Colors.black,
-            size: 30,
+            size: 28,
           ),
         ),
       ),
